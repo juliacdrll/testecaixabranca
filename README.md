@@ -1,4 +1,4 @@
-# Análise de Caixa Branca – Classe `User` (Java)
+# Análise de Caixa Branca
 
 Este repositório apresenta a análise completa de **teste de caixa branca** aplicada à classe `User`, utilizada para autenticação e conexão com banco de dados em Java.
 
