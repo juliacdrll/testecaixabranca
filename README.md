@@ -67,10 +67,10 @@ Decisões identificadas:
 - Decisão 1 → `try-catch`  
 - Decisão 2 → `if (rs.next())`
 
-Fórmula:
+Conta:
 
 \[
-M = número\ de\ decisões + 1 = 2 + 1 = 3
+M = número de decisões + 1 = 2 + 1 = 3
 \]
 
 ✔ **Complexidade Ciclomática = 3**
