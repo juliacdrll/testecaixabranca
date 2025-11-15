@@ -1,4 +1,4 @@
-# 🔍 Análise de Caixa Branca – Classe `User` (Java)
+# Análise de Caixa Branca – Classe `User` (Java)
 
 Este repositório apresenta a análise completa de **teste de caixa branca** aplicada à classe `User`, utilizada para autenticação e conexão com banco de dados em Java.
 
@@ -6,16 +6,16 @@ A avaliação incluiu: revisão estática, fluxogramas, grafo de fluxo, cálculo
 
 ---
 
-## 📂 Arquivos do Repositório
+## Arquivos do Repositório
 
-- 📄 Código-fonte: [`users.java`](users.java)
-- 📊 Planilha de Revisão: [`planilha.jpg`](planilha.jpg)
-- 🧭 Fluxograma Geral: [`fluxo.jpg`](fluxo.jpg)
-- 🌸 Fluxograma + Grafo do Método: [`fluxodometodo.jpg`](fluxodometodo.jpg)
+- Código-fonte: [`users.java`](users.java)
+- Planilha de Revisão: [`planilha.jpg`](planilha.jpg)
+- Fluxograma Geral: [`fluxo.jpg`](fluxo.jpg)
+- Fluxograma + Grafo do Método: [`fluxodometodo.jpg`](fluxodometodo.jpg)
 
 ---
 
-## 🔎 1. Código Base Analisado
+## 1. Código Base Analisado
 
 O arquivo [`users.java`](users.java) contém:
 
@@ -32,7 +32,7 @@ O arquivo [`users.java`](users.java) contém:
 
 ---
 
-## 📋 2. Revisão Estática
+## 2. Revisão Estática
 
 Principais pontos encontrados:
 
@@ -43,24 +43,24 @@ Principais pontos encontrados:
 - Credenciais hardcoded  
 - Falta de comentários  
 
-📎 **Planilha Caixa Branca:**  
+**Planilha Caixa Branca:**  
 ![Planilha](planilha.jpg)
 
 ---
 
-## 🧭 3. Fluxograma Geral da Classe
+## 3. Fluxograma Geral da Classe
 
 ![Fluxograma Geral](fluxo.jpg)
 
 ---
 
-## 🌸 4. Fluxograma + Grafo do Método `verificarUsuario()`
+## 4. Fluxograma + Grafo do Método `verificarUsuario()`
 
 ![Fluxograma do Método](fluxodometodo.jpg)
 
 ---
 
-## 🔢 5. Complexidade Ciclomática
+## 5. Complexidade Ciclomática
 
 Decisões identificadas:
 
@@ -77,7 +77,7 @@ M = número de decisões + 1 = 2 + 1 = 3
 
 ---
 
-## 🛤️ 6. Caminhos Básicos (Detalhados N1 a N15)
+## 6. Caminhos Básicos (Detalhados N1 a N15)
 
 ### ✔ Caminho 1 – Usuário encontrado
 **N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10 → N11(true) → N12 → N15**
@@ -94,7 +94,7 @@ M = número de decisões + 1 = 2 + 1 = 3
 **N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10(erro) → N13 → N15**
 
 ---
-## 📘 7. Conclusão
+## 7. Conclusão
 
 - A análise de caixa branca permitiu mapear todo o fluxo interno da classe `User` e identificar seus pontos críticos.  
 - Embora funcional, o método `verificarUsuario()` apresenta vulnerabilidades, como:
@@ -108,7 +108,7 @@ M = número de decisões + 1 = 2 + 1 = 3
 - A análise evidenciou a importância do teste de caixa branca para detectar falhas internas e melhorar a segurança e a qualidade do código.
 ---
 
-## 👩‍💻 Autora  
+## Autora  
 **Julia Carolina do Rosário Lopes**  
 ADS – FACENS  
 Disciplina: UX/UI
