@@ -1,162 +1,114 @@
 # 🔍 Análise de Caixa Branca – Classe `User` (Java)
 
-Este repositório apresenta a análise completa de **teste de caixa branca** aplicada à classe `User`, utilizada para autenticação e conexão com banco de dados em Java.  
+Este repositório apresenta a análise completa de **teste de caixa branca** aplicada à classe `User`, utilizada para autenticação e conexão com banco de dados em Java.
+
 A avaliação incluiu: revisão estática, fluxogramas, grafo de fluxo, cálculo da complexidade ciclomática e identificação dos caminhos básicos do método `verificarUsuario()`.
 
 ---
 
 ## 📂 Arquivos do Repositório
 
-- 📄 **Código-fonte analisado:**  
-  [`users.java`](users.java)
-
-- 📊 **Planilha de Revisão Estática:**  
-  [`planilha.png`](planilha.png)
-
-- 🧭 **Fluxograma Geral da Classe (`conectarBD` + `verificarUsuario`):**  
-  [`fluxo.png`](fluxo.png)
-
-- 🌸 **Fluxograma + Grafo do Método `verificarUsuario()`:**  
-  [`fluxodometodo.png`](fluxodometodo.png)
+- 📄 Código-fonte: [`users.java`](users.java)
+- 📊 Planilha de Revisão: [`planilha.jpg`](planilha.jpg)
+- 🧭 Fluxograma Geral: [`fluxo.jpg`](fluxo.jpg)
+- 🌸 Fluxograma + Grafo do Método: [`fluxodometodo.jpg`](fluxodometodo.jpg)
 
 ---
 
 ## 🔎 1. Código Base Analisado
 
-O arquivo [`users.java`](users.java) contém dois métodos principais:
+O arquivo [`users.java`](users.java) contém:
 
-### ✔ `conectarBD()`
-- Carrega o driver JDBC  
-- Tenta conectar ao MySQL  
-- Retorna um objeto `Connection` ou `null` em caso de erro  
+### ✔ Método `conectarBD()`
+- Carregamento do driver JDBC  
+- Conexão com MySQL  
+- Retorno da Connection  
 
-### ✔ `verificarUsuario()`
-- Recebe login e senha  
-- Monta a instrução SQL  
-- Executa a query  
-- Verifica se o usuário existe  
-- Retorna **true** ou **false** conforme o resultado  
+### ✔ Método `verificarUsuario()`
+- Montagem da SQL  
+- Execução da consulta  
+- Leitura do ResultSet  
+- Retorno booleano de autenticação  
 
 ---
 
 ## 📋 2. Revisão Estática
 
-Principais problemas identificados:
+Principais pontos encontrados:
 
-- Vulnerabilidade severa a **SQL Injection**  
-- `Connection`, `Statement` e `ResultSet` não são fechados  
-- Bloco `catch` silencioso (não mostra erros)  
-- Risco de `NullPointerException` se a conexão falhar  
-- Credenciais e URL do banco **hardcoded**  
-- Código sem documentação técnica  
+- Vulnerabilidade a SQL Injection  
+- Possível NullPointerException  
+- Recursos JDBC não são fechados  
+- Bloco catch vazio  
+- Credenciais hardcoded  
+- Falta de comentários  
 
-📎 Planilha completa:  
-👉 [`planilha.png`](planilha.png)
+📎 **Planilha:**  
+![Planilha](planilha.jpg)
 
 ---
 
 ## 🧭 3. Fluxograma Geral da Classe
 
-Mostra a execução completa dos métodos:
-
-- **Esquerda:** `conectarBD()`  
-- **Direita:** `verificarUsuario()`  
-
-![Fluxograma da Classe](fluxo.png)
+![Fluxograma Geral](fluxo.jpg)
 
 ---
 
-## 🌸 4. Fluxograma + Grafo de Fluxo do Método `verificarUsuario()`
+## 🌸 4. Fluxograma + Grafo do Método `verificarUsuario()`
 
-O arquivo abaixo representa **tanto o fluxograma quanto o grafo de fluxo (CFG)**, contendo todos os nós (N1 a N15), decisões e desvios:
-
-👉 ![Fluxograma do Método](fluxodometodo.png)
+![Fluxograma do Método](fluxodometodo.jpg)
 
 ---
 
 ## 🔢 5. Complexidade Ciclomática
 
-Foram identificados **2 pontos de decisão**:
+Decisões identificadas:
 
-1. **Bloco try-catch**  
-   - Fluxo normal  
-   - Fluxo de exceção  
+- Decisão 1 → `try-catch`  
+- Decisão 2 → `if (rs.next())`
 
-2. **Condicional `if (rs.next())`**  
-   - Usuário encontrado  
-   - Usuário não encontrado  
-
-### Cálculo
+Fórmula:
 
 \[
-M = \text{decisões} + 1
+M = número\ de\ decisões + 1 = 2 + 1 = 3
 \]
 
-\[
-M = 2 + 1 = 3
-\]
-
-✔ **Complexidade Ciclomática = 3**  
-➡ São necessários **3 testes independentes**.
+✔ **Complexidade Ciclomática = 3**
 
 ---
 
-## 🛤️ 6. Caminhos Básicos (Detalhados de N1 a N15)
+## 🛤️ 6. Caminhos Básicos (Detalhados N1 a N15)
 
-A partir do grafo contido em `fluxodometodo.png`, foram identificados 3 caminhos independentes:
+### ✔ Caminho 1 – Usuário encontrado
+**N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10 → N11(true) → N12 → N15**
 
----
+### ✔ Caminho 2 – Usuário não encontrado
+**N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10 → N11(false) → N14 → N15**
 
-### ✔ Caminho Básico 1 – Usuário encontrado
+### ✔ Caminho 3 – Fluxo de exceção
 
-**Fluxo normal sem erros; `rs.next()` retorna true.**
+#### Variação A – Erro na conexão  
+**N1 → N2 → N3 → N4(erro) → N5 → N15**
 
-**Sequência de nós:**
-
-N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10 → N11(true) → N12 → N15
-
----
-
-### ✔ Caminho Básico 2 – Usuário não encontrado
-
-**Fluxo normal sem erros; `rs.next()` retorna false.**
-
-**Sequência de nós:**
-
-N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10 → N11(false) → N14 → N15
-
----
-
-### ✔ Caminho Básico 3 – Fluxo de exceção (erro na conexão ou na query)
-
-Este é **um único caminho básico**, pois todo erro desvia para o bloco `catch`.
-
-#### 🔹 Variação A – Erro ao conectar
-N1 → N2 → N3 → N4(erro) → N5 → N15
-
-#### 🔹 Variação B – Erro ao executar a query
-N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10(erro) → N13 → N15
-
-> Ambas as variações pertencem ao mesmo caminho básico porque representam o desvio gerado pelo `try-catch`.
+#### Variação B – Erro na query  
+**N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10(erro) → N13 → N15**
 
 ---
 
 ## 📘 7. Conclusão
 
-A análise confirmou que o método funciona, porém apresenta fragilidades importantes:
+A análise mostrou que, apesar de funcional, o método apresenta:
 
-- Vulnerabilidade a SQL Injection  
-- Ausência de fechamento de recursos  
-- Possíveis erros silenciosos por `catch` vazio  
-- Conexão e consulta sem tratamento adequado  
-- Variável global desnecessária  
+- vulnerabilidades importantes  
+- ausência de fechamento de recursos  
+- tratamento inadequado de exceções  
+- risco de falhas silenciosas  
 
-Ainda assim, o fluxograma e o grafo permitiram mapear completamente o método, facilitando a definição da cobertura de testes necessária.
+Os fluxos e o grafo permitiram mapear todos os comportamentos internos e definir os testes necessários.
 
 ---
 
-## 👩‍💻 Autora
-
+## 👩‍💻 Autora  
 **Julia Carolina do Rosário Lopes**  
-Curso de Análise e Desenvolvimento de Sistemas – FACENS  
+ADS – FACENS  
 Disciplina: Qualidade e Testes de Software
