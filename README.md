@@ -43,7 +43,7 @@ Principais pontos encontrados:
 - Credenciais hardcoded  
 - Falta de comentários  
 
-📎 **Planilha:**  
+📎 **Planilha Caixa Branca:**  
 ![Planilha](planilha.jpg)
 
 ---
@@ -94,21 +94,27 @@ M = número\ de\ decisões + 1 = 2 + 1 = 3
 **N1 → N2 → N3 → N4 → N6 → N7 → N8 → N9 → N10(erro) → N13 → N15**
 
 ---
-
 ## 📘 7. Conclusão
 
-A análise mostrou que, apesar de funcional, o método apresenta:
-
-- vulnerabilidades importantes  
-- ausência de fechamento de recursos  
-- tratamento inadequado de exceções  
-- risco de falhas silenciosas  
-
-Os fluxos e o grafo permitiram mapear todos os comportamentos internos e definir os testes necessários.
-
+- A análise de caixa branca permitiu compreender detalhadamente o funcionamento interno da classe `User`, identificando os fluxos, decisões e pontos de falha do método `verificarUsuario()`.  
+- O método cumpre sua função principal de autenticação, porém apresenta vulnerabilidades importantes que afetam a segurança e a estabilidade da aplicação.  
+- Entre as fragilidades identificadas estão:
+  - concatenação de strings na SQL (**risco crítico de SQL Injection**);
+  - possibilidade de **NullPointerException** caso a conexão retorne null;
+  - exceções silenciosas devido ao **bloco catch vazio**;
+  - ausência de fechamento dos recursos `Connection`, `Statement` e `ResultSet`;
+  - credenciais e URL do banco configuradas diretamente no código (**hardcoded**);
+  - uso desnecessário de variável global (`result`).  
+- O fluxograma e o grafo (`fluxodometodo.jpg`) possibilitaram mapear todos os caminhos lógicos do método, permitindo determinar que a **complexidade ciclomática é 3**, exigindo três testes independentes para cobertura total.  
+- A análise demonstra que, embora funcional, o código não segue boas práticas de desenvolvimento, especialmente no que se refere à segurança, tratamento de erros e organização.  
+- Recomenda-se como melhorias:
+  - uso de `PreparedStatement` para evitar SQL Injection;
+  - implementação de `try-with-resources` para fechamento automático dos recursos;
+  - tratamento adequado das exceções com mensagens específicas;
+  - remoção de valores hardcoded e externalização da configuração de banco.  
 ---
 
 ## 👩‍💻 Autora  
 **Julia Carolina do Rosário Lopes**  
 ADS – FACENS  
-Disciplina: Qualidade e Testes de Software
+Disciplina: UX/UI
